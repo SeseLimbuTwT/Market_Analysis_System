@@ -61,7 +61,7 @@ table {
     width: calc(100% - 80px);
     margin: 20px 40px;
     border-collapse: collapse;
-    background: white;
+    background: lightgrey;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
