@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+// version from GitHub
+=======
+// your local version
+>>>>>>> a5acee5
 <?php
 session_start();
 
@@ -13,6 +18,10 @@ $sql = "SELECT
             companies.symbol,
             companies.id,
             company_prices.price,
+<<<<<<< HEAD
+=======
+            companies.id,
+>>>>>>> a5acee5 (updated)
             company_prices.previous_price
         FROM companies
         JOIN company_prices
@@ -20,6 +29,7 @@ $sql = "SELECT
 
 $result = $conn->query($sql);
 
+<<<<<<< HEAD
 $totalCompanies = 0;
 $totalGainers = 0;
 $totalLosers = 0;
@@ -27,6 +37,15 @@ $totalMarketValue = 0;
 
 $companies = [];
 
+=======
+$companies = [];
+
+$totalCompanies = 0;
+$totalChange = 0;
+$gainers = 0;
+$losers = 0;
+
+>>>>>>> a5acee5 (updated)
 while ($row = $result->fetch_assoc()) {
 
     $change = $row['price'] - $row['previous_price'];
@@ -43,6 +62,7 @@ while ($row = $result->fetch_assoc()) {
     $companies[] = $row;
 
     $totalCompanies++;
+<<<<<<< HEAD
     $totalMarketValue += $row['price'];
 
     if ($change > 0) {
@@ -51,6 +71,19 @@ while ($row = $result->fetch_assoc()) {
         $totalLosers++;
     }
 }
+=======
+    $totalChange += $change;
+
+    if ($change > 0) {
+        $gainers++;
+    } elseif ($change < 0) {
+        $losers++;
+    }
+}
+
+$unchanged = $totalCompanies - $gainers - $losers;
+
+>>>>>>> a5acee5 (updated)
 ?>
 
 <!DOCTYPE html>
@@ -65,6 +98,7 @@ while ($row = $result->fetch_assoc()) {
 </head>
 
 <body>
+<<<<<<< HEAD
 
 <?php include "includes/navbar.php"; ?>
 
@@ -258,10 +292,76 @@ while ($row = $result->fetch_assoc()) {
 
         </div>
 
+=======
+    <?php include "includes/navbar.php"; ?>
+    <h1>Market Analyst</h1>
+
+<div class="market-cards">
+
+    <div class="market-card">
+        <div class="card-icon">🏢</div>
+        <div>
+            <p>Total Companies</p>
+            <h2><?php echo $totalCompanies; ?></h2>
+        </div>
+    </div>
+
+    <div class="market-card">
+        <div class="card-icon">📈</div>
+        <div>
+            <p>Gainers</p>
+            <h2 class="positive"><?php echo $gainers; ?></h2>
+        </div>
+    </div>
+
+    <div class="market-card">
+        <div class="card-icon">📉</div>
+        <div>
+            <p>Losers</p>
+            <h2 class="negative"><?php echo $losers; ?></h2>
+        </div>
+    </div>
+
+    <div class="market-card">
+        <div class="card-icon">➖</div>
+        <div>
+            <p>Unchanged</p>
+            <h2><?php echo $unchanged; ?></h2>
+        </div>
+>>>>>>> a5acee5 (updated)
     </div>
 
 </div>
 
+<<<<<<< HEAD
+=======
+<h2>Current Market</h2>
+
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>Company</th>
+            <th>Symbol</th>
+            <th>Current Price</th>
+            <th>Previous Price</th>
+            <th>Change</th>
+            <th>Change %</th>
+        </tr>
+        <?php foreach ($companies as $row) { ?>
+            <tr>
+                <td>
+    <a href="company.php?id=<?php echo $row['id']; ?>">
+        <?php echo $row['name']; ?>
+    </a>
+</td>
+                <td><?php echo $row['symbol']; ?></td>
+                <td>Rs. <?php echo $row['price']; ?></td>
+                <td>Rs. <?php echo $row['previous_price']; ?></td>
+                <td><?php echo number_format($change, 2); ?></td>
+                <td><?php echo number_format($percentage, 2); ?>%</td>
+            </tr>
+        <?php } ?>
+    </table>
+>>>>>>> a5acee5 (updated)
 </body>
 
 </html>

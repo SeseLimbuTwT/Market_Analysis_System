@@ -1,3 +1,12 @@
+<<<<<<< HEAD
+/* GitHub CSS */
+=======
+/* Your local CSS */
+>>>>>>> a5acee5
+* =========================
+   GLOBAL
+========================= */
+
 * {
     box-sizing: border-box;
 }
@@ -9,7 +18,10 @@ body {
     color: #222;
 }
 
-/* Navigation */
+
+/* =========================
+   NAVIGATION
+========================= */
 
 nav {
     background: #1e293b;
@@ -40,7 +52,9 @@ hr {
 }
 
 
-/* Main content */
+/* =========================
+   MAIN CONTENT
+========================= */
 
 h1 {
     margin: 30px 40px 10px;
@@ -54,14 +68,87 @@ p {
     line-height: 1.6;
 }
 
+<<<<<<< HEAD
 /* Tables */
+=======
+
+/* =========================
+   MARKET CARDS
+========================= */
+
+.market-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin: 25px 40px 35px;
+}
+
+.market-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.market-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+}
+
+.card-icon {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    border-radius: 10px;
+    background: #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+}
+
+.market-card p {
+    margin: 0;
+    color: #777;
+    font-size: 14px;
+}
+
+.market-card h2 {
+    margin: 5px 0 0;
+    font-size: 28px;
+    color: #111827;
+}
+
+.positive {
+    color: #16a34a !important;
+}
+
+.negative {
+    color: #dc2626 !important;
+}
+
+
+/* =========================
+   TABLES
+========================= */
+>>>>>>> a5acee5 (updated)
 
 table {
     width: calc(100% - 80px);
     margin: 20px 40px;
     border-collapse: collapse;
+<<<<<<< HEAD
     background: lightgrey;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+=======
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+>>>>>>> a5acee5 (updated)
 }
 
 th {
@@ -86,7 +173,9 @@ td a {
 }
 
 
-/* Company list */
+/* =========================
+   COMPANY LIST
+========================= */
 
 ul {
     list-style: none;
@@ -99,7 +188,7 @@ li {
     margin-bottom: 10px;
     padding: 18px;
     border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 li a {
@@ -109,7 +198,9 @@ li a {
 }
 
 
-/* Forms / Utility tools */
+/* =========================
+   FORMS / UTILITY TOOLS
+========================= */
 
 input {
     padding: 10px;
@@ -132,7 +223,9 @@ button:hover {
 }
 
 
-/* Utility sections */
+/* =========================
+   UTILITY SECTIONS
+========================= */
 
 body > h2,
 body > p,
@@ -148,13 +241,16 @@ body > hr {
 }
 
 
-/* Company analysis */
+/* =========================
+   COMPANY ANALYSIS
+========================= */
 
 .company-section {
     background: white;
     margin: 20px 40px;
     padding: 25px;
     border-radius: 10px;
+<<<<<<< HEAD
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 /* LOGIN PAGE */
@@ -409,6 +505,51 @@ body.auth-page {
 
     .dashboard-cards {
         grid-template-columns: 1fr;
+=======
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+    .market-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    nav {
+        padding: 15px 20px;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    nav h2 {
+        width: 100%;
+    }
+
+    h1 {
+        margin-left: 20px;
+    }
+
+    .market-cards {
+        grid-template-columns: 1fr;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    table {
+        width: calc(100% - 40px);
+        margin-left: 20px;
+        margin-right: 20px;
+        overflow-x: auto;
+>>>>>>> a5acee5 (updated)
     }
 
 }
