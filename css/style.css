@@ -705,3 +705,268 @@ body.auth-page {
     }
 
 }
+/* =========================
+   UTILITY PAGE
+========================= */
+
+.utilities-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+
+/* =========================
+   UTILITY HEADER
+========================= */
+
+.utilities-header {
+    margin-bottom: 30px;
+}
+
+.utilities-header h1 {
+    margin: 0 0 8px;
+}
+
+.utilities-header p {
+    margin: 0;
+    color: #64748b;
+}
+
+
+/* =========================
+   UTILITY CARDS
+========================= */
+
+.utility-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+
+.utility-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 15px;
+    padding: 25px;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.utility-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.10);
+}
+
+
+/* =========================
+   UTILITY ICON
+========================= */
+
+.utility-icon {
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #f1f5f9;
+
+    font-size: 25px;
+
+    margin-bottom: 18px;
+}
+
+
+.utility-card h2 {
+    margin: 0 0 8px;
+
+    font-size: 21px;
+
+    color: #111827;
+}
+
+
+.utility-description {
+    margin: 0 0 25px;
+
+    color: #64748b;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================
+   UTILITY FORM
+========================= */
+
+.utility-form {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.utility-form label {
+    margin-bottom: 7px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    color: #334155;
+}
+
+
+.utility-form input {
+    width: 100%;
+
+    padding: 12px;
+
+    margin: 0 0 17px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 7px;
+
+    font-size: 14px;
+
+    outline: none;
+}
+
+
+.utility-form input:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+
+/* =========================
+   UTILITY BUTTON
+========================= */
+
+.utility-button {
+    width: 100%;
+
+    padding: 12px;
+
+    background: #2563eb;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 7px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.utility-button:hover {
+    background: #1d4ed8;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   CALCULATION RESULT
+========================= */
+
+.utility-result {
+    min-height: 48px;
+
+    margin-top: 20px;
+
+    padding: 13px;
+
+    border-radius: 8px;
+
+    background: #f8fafc;
+
+    color: #334155;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+.utility-result.profit {
+    background: #f0fdf4;
+
+    color: #15803d;
+
+    border: 1px solid #bbf7d0;
+}
+
+
+.utility-result.loss {
+    background: #fef2f2;
+
+    color: #dc2626;
+
+    border: 1px solid #fecaca;
+}
+
+
+.utility-result.neutral {
+    background: #f8fafc;
+
+    color: #475569;
+
+    border: 1px solid #e2e8f0;
+}
+
+
+.utility-result.error {
+    background: #fff7ed;
+
+    color: #c2410c;
+
+    border: 1px solid #fed7aa;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+    .utility-cards {
+        grid-template-columns: 1fr 1fr;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .utilities-page {
+        padding: 20px;
+    }
+
+    .utility-cards {
+        grid-template-columns: 1fr;
+    }
+
+}
