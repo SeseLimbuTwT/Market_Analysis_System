@@ -1,135 +1,428 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Utility Tools - Market Analyst</title>
-     <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="css/style.css?v=5">
+
 </head>
 
 <body>
 
 <?php include "includes/navbar.php"; ?>
 
-<h1>Utility Tools</h1>
 
-<!-- Profit / Loss Calculator -->
-<h2>Profit / Loss Calculator</h2>
+<div class="utilities-page">
 
-<label>Buying Price:</label>
-<input type="number" id="buyPrice">
+    <!-- =========================
+         PAGE HEADER
+    ========================== -->
 
-<br><br>
+    <div class="utilities-header">
 
-<label>Selling Price:</label>
-<input type="number" id="sellPrice">
+        <div>
 
-<br><br>
+            <h1>Utility Tools</h1>
 
-<button onclick="calculateProfitLoss()">Calculate</button>
+            <p>
+                Useful calculators for market analysis and investment decisions.
+            </p>
 
-<p id="profitResult"></p>
+        </div>
 
-
-<hr>
-
-
-<!-- Percentage Change Calculator -->
-<h2>Percentage Change Calculator</h2>
-
-<label>Old Value:</label>
-<input type="number" id="oldValue">
-
-<br><br>
-
-<label>New Value:</label>
-<input type="number" id="newValue">
-
-<br><br>
-
-<button onclick="calculatePercentage()">Calculate</button>
-
-<p id="percentageResult"></p>
+    </div>
 
 
-<hr>
+    <!-- =========================
+         UTILITY CARDS
+    ========================== -->
+
+    <div class="utility-cards">
 
 
-<!-- Investment Calculator -->
-<h2>Investment Return Calculator</h2>
+        <!-- =========================
+             PROFIT / LOSS
+        ========================== -->
 
-<label>Investment Amount:</label>
-<input type="number" id="investment">
+        <div class="utility-card">
 
-<br><br>
+            <div class="utility-icon">
+                💰
+            </div>
 
-<label>Return Percentage:</label>
-<input type="number" id="returnRate">
+            <h2>Profit / Loss Calculator</h2>
 
-<br><br>
+            <p class="utility-description">
+                Calculate your profit or loss from buying and selling.
+            </p>
 
-<button onclick="calculateInvestment()">Calculate</button>
 
-<p id="investmentResult"></p>
+            <div class="utility-form">
+
+                <label for="buyPrice">
+                    Buying Price
+                </label>
+
+                <input
+                    type="number"
+                    id="buyPrice"
+                    placeholder="Enter buying price"
+                    step="0.01"
+                >
+
+
+                <label for="sellPrice">
+                    Selling Price
+                </label>
+
+                <input
+                    type="number"
+                    id="sellPrice"
+                    placeholder="Enter selling price"
+                    step="0.01"
+                >
+
+
+                <button
+                    type="button"
+                    onclick="calculateProfitLoss()"
+                    class="utility-button"
+                >
+                    Calculate
+                </button>
+
+            </div>
+
+
+            <div
+                id="profitResult"
+                class="utility-result"
+            ></div>
+
+        </div>
+
+
+        <!-- =========================
+             PERCENTAGE CHANGE
+        ========================== -->
+
+        <div class="utility-card">
+
+            <div class="utility-icon">
+                📊
+            </div>
+
+            <h2>Percentage Change</h2>
+
+            <p class="utility-description">
+                Find the percentage increase or decrease between two values.
+            </p>
+
+
+            <div class="utility-form">
+
+                <label for="oldValue">
+                    Old Value
+                </label>
+
+                <input
+                    type="number"
+                    id="oldValue"
+                    placeholder="Enter old value"
+                    step="0.01"
+                >
+
+
+                <label for="newValue">
+                    New Value
+                </label>
+
+                <input
+                    type="number"
+                    id="newValue"
+                    placeholder="Enter new value"
+                    step="0.01"
+                >
+
+
+                <button
+                    type="button"
+                    onclick="calculatePercentage()"
+                    class="utility-button"
+                >
+                    Calculate
+                </button>
+
+            </div>
+
+
+            <div
+                id="percentageResult"
+                class="utility-result"
+            ></div>
+
+        </div>
+
+
+        <!-- =========================
+             INVESTMENT RETURN
+        ========================== -->
+
+        <div class="utility-card">
+
+            <div class="utility-icon">
+                📈
+            </div>
+
+            <h2>Investment Return</h2>
+
+            <p class="utility-description">
+                Calculate your expected profit and final investment value.
+            </p>
+
+
+            <div class="utility-form">
+
+                <label for="investment">
+                    Investment Amount
+                </label>
+
+                <input
+                    type="number"
+                    id="investment"
+                    placeholder="Enter investment amount"
+                    step="0.01"
+                >
+
+
+                <label for="returnRate">
+                    Return Percentage
+                </label>
+
+                <input
+                    type="number"
+                    id="returnRate"
+                    placeholder="Enter return percentage"
+                    step="0.01"
+                >
+
+
+                <button
+                    type="button"
+                    onclick="calculateInvestment()"
+                    class="utility-button"
+                >
+                    Calculate
+                </button>
+
+            </div>
+
+
+            <div
+                id="investmentResult"
+                class="utility-result"
+            ></div>
+
+        </div>
+
+    </div>
+
+</div>
 
 
 <script>
 
+/* =========================
+   PROFIT / LOSS CALCULATOR
+========================= */
+
 function calculateProfitLoss() {
 
-    let buy = Number(document.getElementById("buyPrice").value);
-    let sell = Number(document.getElementById("sellPrice").value);
+    let buy = Number(
+        document.getElementById("buyPrice").value
+    );
+
+    let sell = Number(
+        document.getElementById("sellPrice").value
+    );
+
+
+    if (buy <= 0 || sell <= 0) {
+
+        document.getElementById("profitResult").innerHTML =
+            "Please enter valid prices.";
+
+        document.getElementById("profitResult").className =
+            "utility-result error";
+
+        return;
+    }
+
 
     let result = sell - buy;
 
+
     if (result > 0) {
+
         document.getElementById("profitResult").innerHTML =
-            "Profit: Rs. " + result.toFixed(2);
+            "Profit: <strong>Rs. " +
+            result.toFixed(2) +
+            "</strong>";
+
+        document.getElementById("profitResult").className =
+            "utility-result profit";
+
     }
+
     else if (result < 0) {
+
         document.getElementById("profitResult").innerHTML =
-            "Loss: Rs. " + Math.abs(result).toFixed(2);
+            "Loss: <strong>Rs. " +
+            Math.abs(result).toFixed(2) +
+            "</strong>";
+
+        document.getElementById("profitResult").className =
+            "utility-result loss";
+
     }
+
     else {
+
         document.getElementById("profitResult").innerHTML =
             "No Profit, No Loss";
+
+        document.getElementById("profitResult").className =
+            "utility-result neutral";
+
     }
+
 }
 
 
+/* =========================
+   PERCENTAGE CALCULATOR
+========================= */
+
 function calculatePercentage() {
 
-    let oldValue = Number(document.getElementById("oldValue").value);
-    let newValue = Number(document.getElementById("newValue").value);
+    let oldValue = Number(
+        document.getElementById("oldValue").value
+    );
+
+    let newValue = Number(
+        document.getElementById("newValue").value
+    );
+
 
     if (oldValue === 0) {
+
         document.getElementById("percentageResult").innerHTML =
             "Old value cannot be 0.";
+
+        document.getElementById("percentageResult").className =
+            "utility-result error";
+
         return;
     }
+
 
     let change = newValue - oldValue;
 
     let percentage = (change / oldValue) * 100;
 
-    document.getElementById("percentageResult").innerHTML =
-        "Percentage Change: " + percentage.toFixed(2) + "%";
+
+    if (percentage > 0) {
+
+        document.getElementById("percentageResult").innerHTML =
+            "Increase: <strong>+" +
+            percentage.toFixed(2) +
+            "%</strong>";
+
+        document.getElementById("percentageResult").className =
+            "utility-result profit";
+
+    }
+
+    else if (percentage < 0) {
+
+        document.getElementById("percentageResult").innerHTML =
+            "Decrease: <strong>" +
+            percentage.toFixed(2) +
+            "%</strong>";
+
+        document.getElementById("percentageResult").className =
+            "utility-result loss";
+
+    }
+
+    else {
+
+        document.getElementById("percentageResult").innerHTML =
+            "No Change: <strong>0.00%</strong>";
+
+        document.getElementById("percentageResult").className =
+            "utility-result neutral";
+
+    }
+
 }
 
 
+/* =========================
+   INVESTMENT CALCULATOR
+========================= */
+
 function calculateInvestment() {
 
-    let investment = Number(document.getElementById("investment").value);
-    let rate = Number(document.getElementById("returnRate").value);
+    let investment = Number(
+        document.getElementById("investment").value
+    );
+
+    let rate = Number(
+        document.getElementById("returnRate").value
+    );
+
+
+    if (investment <= 0) {
+
+        document.getElementById("investmentResult").innerHTML =
+            "Please enter a valid investment amount.";
+
+        document.getElementById("investmentResult").className =
+            "utility-result error";
+
+        return;
+    }
+
 
     let profit = investment * rate / 100;
 
     let finalAmount = investment + profit;
 
+
     document.getElementById("investmentResult").innerHTML =
-        "Profit: Rs. " + profit.toFixed(2) +
-        "<br>Final Amount: Rs. " + finalAmount.toFixed(2);
+        "Return: <strong>Rs. " +
+        profit.toFixed(2) +
+        "</strong>" +
+        "<br>" +
+        "Final Amount: <strong>Rs. " +
+        finalAmount.toFixed(2) +
+        "</strong>";
+
+    document.getElementById("investmentResult").className =
+        "utility-result profit";
+
 }
 
 </script>
 
+
 </body>
-</html> 
+
+</html>

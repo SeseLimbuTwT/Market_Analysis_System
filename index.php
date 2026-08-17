@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-// version from GitHub
-=======
-// your local version
->>>>>>> a5acee5
 <?php
 session_start();
 
@@ -18,10 +13,6 @@ $sql = "SELECT
             companies.symbol,
             companies.id,
             company_prices.price,
-<<<<<<< HEAD
-=======
-            companies.id,
->>>>>>> a5acee5 (updated)
             company_prices.previous_price
         FROM companies
         JOIN company_prices
@@ -29,23 +20,14 @@ $sql = "SELECT
 
 $result = $conn->query($sql);
 
-<<<<<<< HEAD
+$companies = [];
+
 $totalCompanies = 0;
-$totalGainers = 0;
-$totalLosers = 0;
 $totalMarketValue = 0;
-
-$companies = [];
-
-=======
-$companies = [];
-
-$totalCompanies = 0;
-$totalChange = 0;
 $gainers = 0;
 $losers = 0;
+$unchanged = 0;
 
->>>>>>> a5acee5 (updated)
 while ($row = $result->fetch_assoc()) {
 
     $change = $row['price'] - $row['previous_price'];
@@ -62,53 +44,50 @@ while ($row = $result->fetch_assoc()) {
     $companies[] = $row;
 
     $totalCompanies++;
-<<<<<<< HEAD
     $totalMarketValue += $row['price'];
-
-    if ($change > 0) {
-        $totalGainers++;
-    } elseif ($change < 0) {
-        $totalLosers++;
-    }
-}
-=======
-    $totalChange += $change;
 
     if ($change > 0) {
         $gainers++;
     } elseif ($change < 0) {
         $losers++;
+    } else {
+        $unchanged++;
     }
 }
-
-$unchanged = $totalCompanies - $gainers - $losers;
-
->>>>>>> a5acee5 (updated)
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Market Analyst Dashboard</title>
 
-    <link rel="stylesheet" href="css/style.css?v=3">
+    <link rel="stylesheet" href="css/style.css?v=5">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 
 <body>
-<<<<<<< HEAD
 
 <?php include "includes/navbar.php"; ?>
 
 <div class="dashboard">
 
-    <!-- Welcome Section -->
+    <!-- =========================
+         DASHBOARD HEADER
+    ========================== -->
 
     <div class="dashboard-header">
 
         <div>
+
             <h1>Market Dashboard</h1>
 
             <p>
@@ -121,6 +100,7 @@ $unchanged = $totalCompanies - $gainers - $losers;
             <span>
                 Here's your current market overview.
             </span>
+
         </div>
 
         <div class="dashboard-actions">
@@ -138,57 +118,146 @@ $unchanged = $totalCompanies - $gainers - $losers;
     </div>
 
 
-    <!-- Summary Cards -->
+    <!-- =========================
+         MARKET CARDS
+    ========================== -->
 
-    <div class="dashboard-cards">
+    <div class="market-cards">
 
-        <div class="dashboard-card">
+        <div class="market-card">
 
-            <h3>Total Companies</h3>
+            <div class="card-icon">
+                🏢
+            </div>
 
-            <p>
-                <?php echo $totalCompanies; ?>
-            </p>
+            <div>
 
-        </div>
+                <p>Total Companies</p>
 
+                <h2>
+                    <?php echo $totalCompanies; ?>
+                </h2>
 
-        <div class="dashboard-card">
-
-            <h3>Market Value</h3>
-
-            <p>
-                Rs. <?php echo number_format($totalMarketValue, 2); ?>
-            </p>
-
-        </div>
-
-
-        <div class="dashboard-card">
-
-            <h3>Gainers</h3>
-
-            <p>
-                <?php echo $totalGainers; ?>
-            </p>
+            </div>
 
         </div>
 
 
-        <div class="dashboard-card">
+        <div class="market-card">
 
-            <h3>Losers</h3>
+            <div class="card-icon">
+                📈
+            </div>
 
-            <p>
-                <?php echo $totalLosers; ?>
-            </p>
+            <div>
+
+                <p>Gainers</p>
+
+                <h2 class="positive">
+                    <?php echo $gainers; ?>
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="market-card">
+
+            <div class="card-icon">
+                📉
+            </div>
+
+            <div>
+
+                <p>Losers</p>
+
+                <h2 class="negative">
+                    <?php echo $losers; ?>
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="market-card">
+
+            <div class="card-icon">
+                ➖
+            </div>
+
+            <div>
+
+                <p>Unchanged</p>
+
+                <h2>
+                    <?php echo $unchanged; ?>
+                </h2>
+
+            </div>
 
         </div>
 
     </div>
 
 
-    <!-- Market Section -->
+    <!-- =========================
+         CHART SECTION
+    ========================== -->
+
+    <div class="chart-section">
+
+        <div class="chart-header">
+
+            <div>
+
+                <h2>Market Overview</h2>
+
+                <p>Compare current company prices</p>
+
+            </div>
+
+            <div class="chart-buttons">
+
+                <button
+                    type="button"
+                    class="chart-button active"
+                    onclick="changeChart('bar', this)">
+                    Bar
+                </button>
+
+                <button
+                    type="button"
+                    class="chart-button"
+                    onclick="changeChart('line', this)">
+                    Line
+                </button>
+
+                <button
+                    type="button"
+                    class="chart-button"
+                    onclick="changeChart('pie', this)">
+                    Pie
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="chart-container">
+
+            <canvas id="marketChart"></canvas>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         MARKET TABLE
+    ========================== -->
 
     <div class="market-section">
 
@@ -257,28 +326,50 @@ $unchanged = $totalCompanies - $gainers - $losers;
 
                         <td>
 
-                            Rs. <?php echo number_format($row['price'], 2); ?>
+                            Rs.
+                            <?php echo number_format($row['price'], 2); ?>
 
                         </td>
 
 
                         <td>
 
-                            Rs. <?php echo number_format($row['previous_price'], 2); ?>
+                            Rs.
+                            <?php echo number_format($row['previous_price'], 2); ?>
 
                         </td>
 
 
                         <td class="<?php echo $row['change'] >= 0 ? 'positive' : 'negative'; ?>">
 
-                            <?php echo number_format($row['change'], 2); ?>
+                            <?php if ($row['change'] > 0) { ?>
+
+                                ↑
+
+                            <?php } elseif ($row['change'] < 0) { ?>
+
+                                ↓
+
+                            <?php } ?>
+
+                            <?php echo number_format(abs($row['change']), 2); ?>
 
                         </td>
 
 
                         <td class="<?php echo $row['percentage'] >= 0 ? 'positive' : 'negative'; ?>">
 
-                            <?php echo number_format($row['percentage'], 2); ?>%
+                            <?php if ($row['percentage'] > 0) { ?>
+
+                                ↑
+
+                            <?php } elseif ($row['percentage'] < 0) { ?>
+
+                                ↓
+
+                            <?php } ?>
+
+                            <?php echo number_format(abs($row['percentage']), 2); ?>%
 
                         </td>
 
@@ -292,76 +383,155 @@ $unchanged = $totalCompanies - $gainers - $losers;
 
         </div>
 
-=======
-    <?php include "includes/navbar.php"; ?>
-    <h1>Market Analyst</h1>
-
-<div class="market-cards">
-
-    <div class="market-card">
-        <div class="card-icon">🏢</div>
-        <div>
-            <p>Total Companies</p>
-            <h2><?php echo $totalCompanies; ?></h2>
-        </div>
-    </div>
-
-    <div class="market-card">
-        <div class="card-icon">📈</div>
-        <div>
-            <p>Gainers</p>
-            <h2 class="positive"><?php echo $gainers; ?></h2>
-        </div>
-    </div>
-
-    <div class="market-card">
-        <div class="card-icon">📉</div>
-        <div>
-            <p>Losers</p>
-            <h2 class="negative"><?php echo $losers; ?></h2>
-        </div>
-    </div>
-
-    <div class="market-card">
-        <div class="card-icon">➖</div>
-        <div>
-            <p>Unchanged</p>
-            <h2><?php echo $unchanged; ?></h2>
-        </div>
->>>>>>> a5acee5 (updated)
     </div>
 
 </div>
 
-<<<<<<< HEAD
-=======
-<h2>Current Market</h2>
 
-    <table border="1" cellpadding="10">
-        <tr>
-            <th>Company</th>
-            <th>Symbol</th>
-            <th>Current Price</th>
-            <th>Previous Price</th>
-            <th>Change</th>
-            <th>Change %</th>
-        </tr>
-        <?php foreach ($companies as $row) { ?>
-            <tr>
-                <td>
-    <a href="company.php?id=<?php echo $row['id']; ?>">
-        <?php echo $row['name']; ?>
-    </a>
-</td>
-                <td><?php echo $row['symbol']; ?></td>
-                <td>Rs. <?php echo $row['price']; ?></td>
-                <td>Rs. <?php echo $row['previous_price']; ?></td>
-                <td><?php echo number_format($change, 2); ?></td>
-                <td><?php echo number_format($percentage, 2); ?>%</td>
-            </tr>
-        <?php } ?>
-    </table>
->>>>>>> a5acee5 (updated)
+<!-- =========================
+     CHART JAVASCRIPT
+========================== -->
+
+<script>
+
+const companyNames = <?php
+    echo json_encode(
+        array_column($companies, 'symbol')
+    );
+?>;
+
+const companyPrices = <?php
+    echo json_encode(
+        array_map(
+            'floatval',
+            array_column($companies, 'price')
+        )
+    );
+?>;
+
+let currentChart = null;
+
+function createChart(type) {
+
+    const ctx = document
+        .getElementById('marketChart')
+        .getContext('2d');
+
+    if (currentChart) {
+        currentChart.destroy();
+    }
+
+    let chartType = type;
+
+    let chartData = {
+        labels: companyNames,
+
+        datasets: [{
+            label: 'Current Price',
+
+            data: companyPrices,
+
+            borderWidth: 2,
+
+            borderRadius: 6,
+
+            tension: 0.3
+        }]
+    };
+
+
+    if (type === 'pie') {
+
+        chartData = {
+
+            labels: companyNames,
+
+            datasets: [{
+                label: 'Current Price',
+
+                data: companyPrices,
+
+                borderWidth: 2
+            }]
+
+        };
+
+    }
+
+
+    currentChart = new Chart(ctx, {
+
+        type: chartType,
+
+        data: chartData,
+
+        options: {
+
+            responsive: true,
+
+            maintainAspectRatio: false,
+
+            plugins: {
+
+                legend: {
+                    display: type === 'pie'
+                }
+
+            },
+
+            scales: {
+
+                y: {
+
+                    beginAtZero: true,
+
+                    display: type !== 'pie',
+
+                    title: {
+
+                        display: true,
+
+                        text: 'Price (Rs.)'
+
+                    }
+
+                },
+
+                x: {
+
+                    display: type !== 'pie'
+
+                }
+
+            }
+
+        }
+
+    });
+
+}
+
+
+function changeChart(type, button) {
+
+    document
+        .querySelectorAll('.chart-button')
+        .forEach(btn => {
+            btn.classList.remove('active');
+        });
+
+    button.classList.add('active');
+
+    createChart(type);
+
+}
+
+
+// Start with bar chart
+createChart('bar');
+
+</script>
+
 </body>
 
 </html>
