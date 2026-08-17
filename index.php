@@ -68,6 +68,8 @@ while ($row = $result->fetch_assoc()) {
     <title>Market Analyst Dashboard</title>
 
     <link rel="stylesheet" href="css/style.css?v=5">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -122,85 +124,92 @@ while ($row = $result->fetch_assoc()) {
          MARKET CARDS
     ========================== -->
 
-    <div class="market-cards">
+<div class="market-cards">
 
-        <div class="market-card">
+    <!-- Total Companies -->
 
-            <div class="card-icon">
-                🏢
-            </div>
+    <div class="market-card">
 
-            <div>
-
-                <p>Total Companies</p>
-
-                <h2>
-                    <?php echo $totalCompanies; ?>
-                </h2>
-
-            </div>
-
+        <div class="card-icon company-icon">
+            <span>+</span>
         </div>
 
+        <div>
 
-        <div class="market-card">
+            <p>Total Companies</p>
 
-            <div class="card-icon">
-                📈
-            </div>
-
-            <div>
-
-                <p>Gainers</p>
-
-                <h2 class="positive">
-                    <?php echo $gainers; ?>
-                </h2>
-
-            </div>
-
-        </div>
-
-
-        <div class="market-card">
-
-            <div class="card-icon">
-                📉
-            </div>
-
-            <div>
-
-                <p>Losers</p>
-
-                <h2 class="negative">
-                    <?php echo $losers; ?>
-                </h2>
-
-            </div>
-
-        </div>
-
-
-        <div class="market-card">
-
-            <div class="card-icon">
-                ➖
-            </div>
-
-            <div>
-
-                <p>Unchanged</p>
-
-                <h2>
-                    <?php echo $unchanged; ?>
-                </h2>
-
-            </div>
+            <h2>
+                <?php echo $totalCompanies; ?>
+            </h2>
 
         </div>
 
     </div>
 
+
+    <!-- Gainers -->
+
+    <div class="market-card">
+
+        <div class="card-icon gainers-icon">
+            ↗
+        </div>
+
+        <div>
+
+            <p>Gainers</p>
+
+            <h2 class="positive">
+                <?php echo $gainers; ?>
+            </h2>
+
+        </div>
+
+    </div>
+
+
+    <!-- Losers -->
+
+    <div class="market-card">
+
+        <div class="card-icon losers-icon">
+            ↘
+        </div>
+
+        <div>
+
+            <p>Losers</p>
+
+            <h2 class="negative">
+                <?php echo $losers; ?>
+            </h2>
+
+        </div>
+
+    </div>
+
+
+    <!-- Unchanged -->
+
+    <div class="market-card">
+
+        <div class="card-icon unchanged-icon">
+            −
+        </div>
+
+        <div>
+
+            <p>Unchanged</p>
+
+            <h2>
+                <?php echo $unchanged; ?>
+            </h2>
+
+        </div>
+
+    </div>
+
+</div>
 
     <!-- =========================
          CHART SECTION

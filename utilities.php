@@ -9,9 +9,10 @@
 
     <title>Utility Tools - Market Analyst</title>
 
-    <link rel="stylesheet" href="css/style.css?v=5">
+    <link rel="stylesheet" href="css/style.css?v=6">
 
 </head>
+
 
 <body>
 
@@ -19,6 +20,7 @@
 
 
 <div class="utilities-page">
+
 
     <!-- =========================
          PAGE HEADER
@@ -39,6 +41,7 @@
     </div>
 
 
+
     <!-- =========================
          UTILITY CARDS
     ========================== -->
@@ -52,8 +55,8 @@
 
         <div class="utility-card">
 
-            <div class="utility-icon">
-                💰
+            <div class="utility-icon money-icon">
+                <span>Rs</span>
             </div>
 
             <h2>Profit / Loss Calculator</h2>
@@ -108,14 +111,15 @@
         </div>
 
 
+
         <!-- =========================
              PERCENTAGE CHANGE
         ========================== -->
 
         <div class="utility-card">
 
-            <div class="utility-icon">
-                📊
+            <div class="utility-icon percentage-icon">
+                %
             </div>
 
             <h2>Percentage Change</h2>
@@ -170,14 +174,15 @@
         </div>
 
 
+
         <!-- =========================
              INVESTMENT RETURN
         ========================== -->
 
         <div class="utility-card">
 
-            <div class="utility-icon">
-                📈
+            <div class="utility-icon investment-icon">
+                ↗
             </div>
 
             <h2>Investment Return</h2>
@@ -231,12 +236,15 @@
 
         </div>
 
+
     </div>
 
 </div>
 
 
+
 <script>
+
 
 /* =========================
    PROFIT / LOSS CALCULATOR
@@ -303,6 +311,7 @@ function calculateProfitLoss() {
     }
 
 }
+
 
 
 /* =========================
@@ -372,6 +381,7 @@ function calculatePercentage() {
     }
 
 }
+
 
 
 /* =========================
