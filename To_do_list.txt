@@ -1,0 +1,5 @@
+THIS IS A TO DO LIST
+Update the drop down thing list(hamburger)
+Organize the thing in to proper sections
+Need proper account management things
+Need to add the options to add the proper company things
