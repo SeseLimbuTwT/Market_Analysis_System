@@ -432,7 +432,6 @@ function calculateInvestment() {
 
 </script>
 
-
 </body>
 
 </html>
