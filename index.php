@@ -27,7 +27,9 @@ $totalMarketValue = 0;
 $gainers = 0;
 $losers = 0;
 $unchanged = 0;
-
+$topGainer = null;
+$topLoser = null;
+$totalPercentage = 0;
 while ($row = $result->fetch_assoc()) {
 
     $change = $row['price'] - $row['previous_price'];
@@ -40,7 +42,15 @@ while ($row = $result->fetch_assoc()) {
 
     $row['change'] = $change;
     $row['percentage'] = $percentage;
+$totalPercentage += $percentage;
 
+if ($topGainer === null || $percentage > $topGainer['percentage']) {
+    $topGainer = $row;
+}
+
+if ($topLoser === null || $percentage < $topLoser['percentage']) {
+    $topLoser = $row;
+}
     $companies[] = $row;
 
     $totalCompanies++;
@@ -54,6 +64,9 @@ while ($row = $result->fetch_assoc()) {
         $unchanged++;
     }
 }
+$averagePercentage = $totalCompanies > 0
+    ? $totalPercentage / $totalCompanies
+    : 0;
 ?>
 
 <!DOCTYPE html>
@@ -67,7 +80,7 @@ while ($row = $result->fetch_assoc()) {
 
     <title>Market Analyst Dashboard</title>
 
-    <link rel="stylesheet" href="css/style.css?v=5">
+    <link rel="stylesheet" href="css/style.css?v=7">
     <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
@@ -131,7 +144,7 @@ while ($row = $result->fetch_assoc()) {
     <div class="market-card">
 
         <div class="card-icon company-icon">
-            <span>+</span>
+            <i class="fa-solid fa-building"></i>
         </div>
 
         <div>
@@ -152,7 +165,7 @@ while ($row = $result->fetch_assoc()) {
     <div class="market-card">
 
         <div class="card-icon gainers-icon">
-            ↗
+            <i class="fa-solid fa-arrow-trend-up"></i>
         </div>
 
         <div>
@@ -173,7 +186,7 @@ while ($row = $result->fetch_assoc()) {
     <div class="market-card">
 
         <div class="card-icon losers-icon">
-            ↘
+            <i class="fa-solid fa-arrow-trend-down"></i>
         </div>
 
         <div>
@@ -194,7 +207,7 @@ while ($row = $result->fetch_assoc()) {
     <div class="market-card">
 
         <div class="card-icon unchanged-icon">
-            −
+            <i class="fa-solid fa-minus"></i>
         </div>
 
         <div>
@@ -394,7 +407,215 @@ while ($row = $result->fetch_assoc()) {
 
     </div>
 
+
+    <!-- =========================
+         MARKET INSIGHTS
+    ========================== -->
+
+    <div class="insights-section">
+
+        <div class="section-title">
+            <h2>Market Insights</h2>
+            <p>Quick analysis of today's market movement</p>
+        </div>
+
+        <div class="insights-grid">
+
+            <!-- Top Gainer -->
+            <div class="insight-card">
+                <div class="insight-icon positive-icon"><i class="fa-solid fa-arrow-trend-up"></i></div>
+
+                <div>
+                    <span>Top Gainer</span>
+
+                    <?php if ($topGainer) { ?>
+
+                        <h3>
+                            <?php echo htmlspecialchars($topGainer['name']); ?>
+                        </h3>
+
+                        <p class="positive">
+                            +<?php echo number_format($topGainer['percentage'], 2); ?>%
+                        </p>
+
+                    <?php } ?>
+                </div>
+            </div>
+
+
+            <!-- Top Loser -->
+            <div class="insight-card">
+                <div class="insight-icon negative-icon"><i class="fa-solid fa-arrow-trend-down"></i></div>
+
+                <div>
+                    <span>Top Loser</span>
+
+                    <?php if ($topLoser) { ?>
+
+                        <h3>
+                            <?php echo htmlspecialchars($topLoser['name']); ?>
+                        </h3>
+
+                        <p class="negative">
+                            <?php echo number_format($topLoser['percentage'], 2); ?>%
+                        </p>
+
+                    <?php } ?>
+                </div>
+            </div>
+
+
+            <!-- Average Movement -->
+            <div class="insight-card">
+                <div class="insight-icon"><i class="fa-solid fa-percent"></i></div>
+
+                <div>
+                    <span>Average Market Change</span>
+
+                    <h3>
+                        <?php echo number_format($averagePercentage, 2); ?>%
+                    </h3>
+
+                    <p>
+                        Across <?php echo $totalCompanies; ?> companies
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         MARKET SUMMARY
+    ========================== -->
+
+    <div class="summary-section">
+
+        <div class="section-title">
+            <h2>Market Summary</h2>
+            <p>A quick overview of the current market</p>
+        </div>
+
+        <div class="summary-content">
+
+            <div>
+                <h3>Market Activity</h3>
+
+                <?php if ($gainers > $losers) { ?>
+
+                    <p>
+                        The market is showing a
+                        <strong class="positive">positive movement</strong>
+                        with more companies gaining than losing.
+                    </p>
+
+                <?php } elseif ($losers > $gainers) { ?>
+
+                    <p>
+                        The market is showing a
+                        <strong class="negative">negative movement</strong>
+                        with more companies losing than gaining.
+                    </p>
+
+                <?php } else { ?>
+
+                    <p>
+                        The market is currently
+                        <strong>balanced</strong>,
+                        with an equal number of gainers and losers.
+                    </p>
+
+                <?php } ?>
+
+            </div>
+
+            <div class="summary-stats">
+
+                <div>
+                    <span>Total Companies</span>
+                    <strong><?php echo $totalCompanies; ?></strong>
+                </div>
+
+                <div>
+                    <span>Gainers</span>
+                    <strong class="positive"><?php echo $gainers; ?></strong>
+                </div>
+
+                <div>
+                    <span>Losers</span>
+                    <strong class="negative"><?php echo $losers; ?></strong>
+                </div>
+
+                <div>
+                    <span>Unchanged</span>
+                    <strong><?php echo $unchanged; ?></strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         ABOUT SECTION
+    ========================== -->
+
+    <div class="about-section">
+
+        <h2>About Market Analyst</h2>
+
+        <p>
+            Market Analyst is a web-based market analysis system
+            designed to help users monitor company prices,
+            compare market movements and perform useful
+            financial calculations.
+        </p>
+
+        <p>
+            Use the dashboard to monitor the current market,
+            explore individual companies and use the available
+            analysis tools to support your investment decisions.
+        </p>
+
+    </div>
+
+
 </div>
+
+
+<!-- =========================
+     FOOTER
+========================== -->
+
+<footer class="site-footer">
+
+    <div>
+        <h3>Market Analyst</h3>
+
+        <p>
+            Simple tools for monitoring and analyzing
+            market information.
+        </p>
+    </div>
+
+    <div class="footer-links">
+
+        <a href="index.php">Dashboard</a>
+        <a href="companies.php">Companies</a>
+        <a href="utilities.php">Utilities</a>
+        <a href="logout.php">Logout</a>
+
+    </div>
+
+    <p class="copyright">
+        © <?php echo date("Y"); ?> Market Analyst. All rights reserved.
+    </p>
+
+</footer>
 
 
 <!-- =========================

@@ -970,3 +970,483 @@ body.auth-page {
     }
 
 }
+/* =================================
+   LONG DASHBOARD SECTIONS
+================================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+/* Market Insights */
+
+.insights-section,
+.summary-section,
+.about-section {
+    margin-top: 24px;
+    background: white;
+    border-radius: 10px;
+    padding: 24px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.section-title h2 {
+    margin: 0 0 5px;
+}
+
+.section-title p {
+    margin: 0 0 20px;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+
+/* Insight Cards */
+
+.insights-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.insight-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+}
+
+.insight-icon {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: #f1f5f9;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.positive-icon {
+    color: #008000;
+}
+
+.negative-icon {
+    color: #dc2626;
+}
+
+.insight-card span {
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.insight-card h3 {
+    margin: 5px 0;
+    font-size: 18px;
+}
+
+.insight-card p {
+    margin: 0;
+}
+
+
+/* Market Summary */
+
+.summary-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.summary-content h3 {
+    margin-top: 0;
+}
+
+.summary-content p {
+    color: #555;
+    line-height: 1.7;
+}
+
+.summary-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.summary-stats div {
+    padding: 15px;
+    background: #f8fafc;
+    border-radius: 8px;
+}
+
+.summary-stats span {
+    display: block;
+    color: #6b7280;
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.summary-stats strong {
+    font-size: 20px;
+}
+
+
+/* About */
+
+.about-section {
+    line-height: 1.7;
+}
+
+.about-section h2 {
+    margin-top: 0;
+}
+
+.about-section p {
+    color: #555;
+    max-width: 800px;
+}
+
+
+/* Footer */
+
+.site-footer {
+    margin-top: 50px;
+    padding: 40px 8%;
+    background: #1e293b;
+    color: white;
+}
+
+.site-footer h3 {
+    margin-top: 0;
+}
+
+.site-footer p {
+    color: #cbd5e1;
+}
+
+.footer-links {
+    display: flex;
+    gap: 25px;
+    margin: 20px 0;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.copyright {
+    border-top: 1px solid #475569;
+    padding-top: 20px;
+    font-size: 13px;
+}
+
+
+/* Responsive */
+
+@media (max-width: 800px) {
+
+    .insights-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .summary-content {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 500px) {
+
+    .summary-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+}
+
+/* =================================
+   NEW: ICON COLOR VARIANTS
+   (these classes were already used
+   in the HTML but never defined)
+================================= */
+
+.company-icon,
+.money-icon {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+.gainers-icon,
+.investment-icon {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.losers-icon {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.unchanged-icon,
+.percentage-icon {
+    background: #ede9fe;
+    color: #7c3aed;
+}
+
+
+/* =================================
+   NEW: NAV LINK STYLE + ACTIVE STATE
+================================= */
+
+nav a {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 12px;
+    border-radius: 6px;
+    transition: background 0.2s ease;
+}
+
+nav a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    text-decoration: underline;
+}
+
+nav a.active {
+    background: #2563eb;
+}
+
+
+/* =================================
+   NEW: COMPANY GRID (companies.php)
+================================= */
+
+.company-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.company-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 15px;
+    padding: 22px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.company-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.10);
+}
+
+.company-card-top {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.company-card h3 {
+    margin: 0;
+    font-size: 17px;
+    color: #111827;
+}
+
+.company-symbol {
+    color: #64748b;
+    font-size: 13px;
+}
+
+.company-sector {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: #f1f5f9;
+    color: #475569;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.company-card-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.company-card-price h2 {
+    margin: 0;
+    font-size: 22px;
+    color: #111827;
+}
+
+.change-badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.change-badge.positive {
+    background: #f0fdf4;
+}
+
+.change-badge.negative {
+    background: #fef2f2;
+}
+
+
+/* =================================
+   NEW: COMPANY DETAIL PAGE
+================================= */
+
+.back-link {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    display: inline-block;
+    margin: 20px 0 0 40px;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+.company-hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 12px;
+}
+
+.company-hero h1 {
+    margin: 0 0 6px;
+}
+
+.price-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin: 20px 0 25px;
+}
+
+.financial-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin: 10px 0 25px;
+}
+
+.price-stat {
+    background: #f8fafc;
+    border-radius: 10px;
+    padding: 16px;
+}
+
+.price-stat span {
+    display: block;
+    color: #64748b;
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+
+.price-stat strong {
+    font-size: 19px;
+}
+
+.compare-row {
+    margin-bottom: 18px;
+}
+
+.compare-row-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: #334155;
+}
+
+.compare-track {
+    background: #e5e7eb;
+    width: 100%;
+    height: 14px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.compare-fill {
+    height: 100%;
+    border-radius: 20px;
+}
+
+.compare-fill.current {
+    background: #1e293b;
+}
+
+.compare-fill.previous {
+    background: #94a3b8;
+}
+
+.compare-fill.revenue {
+    background: #2563eb;
+}
+
+.compare-fill.expenses {
+    background: #f59e0b;
+}
+
+.no-data-message {
+    color: #64748b;
+    font-style: italic;
+}
+
+
+/* =================================
+   NEW: RESPONSIVE ADD-ONS
+================================= */
+
+@media (max-width: 700px) {
+
+    .price-stat-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .company-hero {
+        flex-direction: column;
+    }
+
+}
+
+@media (max-width: 500px) {
+
+    .price-stat-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
