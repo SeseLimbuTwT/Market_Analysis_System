@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if (!isset($_SESSION["user_id"])) {
+    header("Location: login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +17,9 @@
 
     <title>Utility Tools - Market Analyst</title>
 
-    <link rel="stylesheet" href="css/style.css?v=6">
+    <link rel="stylesheet" href="css/style.css?v=7">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 </head>
 
@@ -56,7 +66,7 @@
         <div class="utility-card">
 
             <div class="utility-icon money-icon">
-                <span>Rs</span>
+                <i class="fa-solid fa-sack-dollar"></i>
             </div>
 
             <h2>Profit / Loss Calculator</h2>
@@ -119,7 +129,7 @@
         <div class="utility-card">
 
             <div class="utility-icon percentage-icon">
-                %
+                <i class="fa-solid fa-percent"></i>
             </div>
 
             <h2>Percentage Change</h2>
@@ -182,7 +192,7 @@
         <div class="utility-card">
 
             <div class="utility-icon investment-icon">
-                ↗
+                <i class="fa-solid fa-arrow-trend-up"></i>
             </div>
 
             <h2>Investment Return</h2>
